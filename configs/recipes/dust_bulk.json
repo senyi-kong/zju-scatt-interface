@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "name": "dust_shape_ensemble",
+  "wavelength_unit": "um",
+  "wavelengths": [0.44, 0.55, 0.67, 0.87, 1.64],
+  "particles": [
+    {
+      "name": "dust",
+      "particle_type": "super_spheroid",
+      "size_distribution": {
+        "size": [0.1, 0.2, 0.5, 1, 2, 5, 10],
+        "dndr": [2, 10, 40, 100, 80, 20, 2],
+        "size_unit": "um",
+        "size_definition": "volume_equivalent_sphere_radius"
+      },
+      "refractive_index": {
+        "mode": "fixed",
+        "real": 1.5,
+        "imaginary": 0.01
+      },
+      "shape_ensemble": [
+        {
+          "roundness": 2.0,
+          "aspect_ratio": 0.5,
+          "weight": 0.2
+        },
+        {
+          "roundness": 2.5,
+          "aspect_ratio": 1.0,
+          "weight": 0.5
+        },
+        {
+          "roundness": 3.0,
+          "aspect_ratio": 2.0,
+          "weight": 0.3
+        }
+      ]
+    }
+  ],
+  "calculation": {
+    "include_phase_matrix": true,
+    "scattering_angles_degrees": [0, 30, 60, 90, 120, 150, 180],
+    "truncation_policy": "truncate",
+    "check_convergence": true,
+    "strict_qa": true
+  },
+  "output": {
+    "path": "outputs/dust_bulk.h5",
+    "format": "hdf5",
+    "compression": true,
+    "atomic": true
+  }
+}

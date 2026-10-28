@@ -1,0 +1,21 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ruff_cache/
+.venv/
+build/
+dist/
+zju_scatt_data/
+*.part
+*.log
+
+# Local results and credentials
+.pytest_cache/
+.env
+.env.*
+!.env.example
+.zju_scatt/
+session.json
+example_audit/
+*_output/
+release_candidates/

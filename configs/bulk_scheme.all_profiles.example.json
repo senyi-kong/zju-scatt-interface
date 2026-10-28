@@ -1,0 +1,173 @@
+{
+  "schema_version": "1.0",
+  "name": "all_profile_parameter_reference",
+  "wavelength_unit": "um",
+  "wavelengths": [0.55],
+  "interpolation": "linear",
+  "particles": [
+    {
+      "name": "dust",
+      "particle_type": "super_spheroid",
+      "size_distribution": {
+        "size": [0.1, 0.3, 1.0, 3.0],
+        "dndr": [10.0, 40.0, 30.0, 5.0],
+        "size_unit": "um",
+        "size_definition": "volume_equivalent_sphere_radius"
+      },
+      "refractive_index": {
+        "mode": "fixed",
+        "real": 1.5,
+        "imaginary": 0.01
+      },
+      "shape_parameters": {
+        "roundness": {
+          "values": [2.0, 2.5],
+          "weights": [0.4, 0.6]
+        },
+        "aspect_ratio": 1.5
+      }
+    },
+    {
+      "name": "black_carbon",
+      "particle_type": "encapsulated_fractal_aggregates_black_carbon",
+      "size_distribution": {
+        "size": [0.03, 0.1, 0.3, 1.0],
+        "dndr": [20.0, 100.0, 40.0, 2.0],
+        "size_unit": "um",
+        "size_definition": "volume_equivalent_sphere_radius"
+      },
+      "refractive_index": {
+        "mode": "fixed",
+        "black_carbon": {
+          "real": 1.85,
+          "imaginary": 0.55
+        },
+        "hygroscopic": {
+          "real": 1.4,
+          "imaginary": 0.05
+        }
+      },
+      "shape_parameters": {
+        "df": {
+          "values": [1.8, 2.4],
+          "weights": [0.5, 0.5]
+        },
+        "vf": 0.2
+      }
+    },
+    {
+      "name": "sea_salt",
+      "particle_type": "coated_super_spheroid_seasalt",
+      "size_distribution": {
+        "size": [0.05, 0.2, 1.0, 5.0],
+        "dndr": [50.0, 100.0, 20.0, 1.0],
+        "size_definition": "maximum_dimension_radius"
+      },
+      "refractive_index": {
+        "mode": "database"
+      },
+      "shape_parameters": {
+        "relative_humidity": {
+          "values": [0.5, 0.8],
+          "weights": [0.3, 0.7]
+        },
+        "humidity_branch": "deliquescence"
+      }
+    },
+    {
+      "name": "ice",
+      "particle_type": "super_spheroid_ice",
+      "size_distribution": {
+        "size": [5.0, 10.0, 30.0, 100.0],
+        "dndr": [1.0, 10.0, 5.0, 0.5],
+        "size_definition": "volume_equivalent_sphere_radius"
+      },
+      "refractive_index": {
+        "mode": "database_temperature",
+        "temperature_k": 250.0
+      },
+      "shape_ensemble": [
+        {
+          "roundness": 2.0,
+          "aspect_ratio": 1.0,
+          "weight": 0.4
+        },
+        {
+          "roundness": 2.5,
+          "aspect_ratio": 1.5,
+          "weight": 0.6
+        }
+      ]
+    },
+    {
+      "name": "sulfate",
+      "particle_type": "sphere_sulfate",
+      "size_distribution": {
+        "size": [0.03, 0.1, 0.3, 1.0],
+        "dndr": [100.0, 500.0, 100.0, 5.0]
+      },
+      "refractive_index": {
+        "mode": "database"
+      },
+      "shape_parameters": {
+        "relative_humidity": 0.8
+      }
+    },
+    {
+      "name": "nitrate",
+      "particle_type": "sphere_nitrate",
+      "size_distribution": {
+        "size": [0.03, 0.1, 0.3, 1.0],
+        "dndr": [100.0, 500.0, 100.0, 5.0]
+      },
+      "refractive_index": {
+        "mode": "database"
+      },
+      "shape_parameters": {
+        "relative_humidity": 0.8
+      }
+    },
+    {
+      "name": "organic_carbon",
+      "particle_type": "sphere_organic_carbon",
+      "size_distribution": {
+        "size": [0.03, 0.1, 0.3, 1.0],
+        "dndr": [100.0, 500.0, 100.0, 5.0]
+      },
+      "refractive_index": {
+        "mode": "database"
+      },
+      "shape_parameters": {
+        "relative_humidity": 0.8
+      }
+    },
+    {
+      "name": "water_cloud",
+      "particle_type": "sphere_water_cloud",
+      "size_distribution": {
+        "size": [1.0, 3.0, 10.0, 30.0],
+        "dndr": [1.0, 10.0, 50.0, 5.0]
+      },
+      "refractive_index": {
+        "mode": "database"
+      }
+    }
+  ],
+  "calculation": {
+    "include_phase_matrix": true,
+    "scattering_angles_degrees": [0, 30, 60, 90, 120, 150, 180],
+    "truncation_policy": "truncate",
+    "check_convergence": true,
+    "convergence_tolerance": 0.05,
+    "strict_convergence": false,
+    "strict_qa": true
+  },
+  "output": {
+    "path": "outputs/all_profile_reference.h5",
+    "format": "hdf5",
+    "compression": true,
+    "compression_level": 4,
+    "chunk_wavelength": 32,
+    "atomic": true
+  }
+}

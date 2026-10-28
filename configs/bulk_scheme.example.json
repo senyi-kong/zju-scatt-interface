@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "name": "two_component_demo",
+  "wavelength_unit": "um",
+  "wavelengths": {
+    "min": 0.4,
+    "max": 2.5,
+    "step": 0.1
+  },
+  "temperatures_k": [220, 270],
+  "interpolation": "linear",
+  "calculation": {
+    "include_phase_matrix": false,
+    "truncation_policy": "truncate",
+    "check_convergence": true,
+    "convergence_tolerance": 0.05,
+    "strict_convergence": false,
+    "strict_qa": true
+  },
+  "particles": [
+    {
+      "name": "ice",
+      "particle_type": "super_spheroid_ice",
+      "shape_parameters": {
+        "n": 2.0,
+        "aspect_ratio": 1.0
+      },
+      "size_distribution": {
+        "size": [5.0, 10.0, 20.0, 40.0, 80.0],
+        "dndr": [50.0, 200.0, 400.0, 250.0, 100.0],
+        "size_unit": "um",
+        "size_definition": "volume_equivalent_sphere_radius",
+        "integration_mode": "discrete_bin"
+      },
+      "refractive_index": {
+        "mode": "database_temperature",
+        "temperature_k": 220
+      }
+    },
+    {
+      "name": "sulfate",
+      "particle_type": "sphere_sulfate",
+      "shape_parameters": {
+        "relative_humidity": 0.8
+      },
+      "size_distribution": {
+        "size": [0.03, 0.05, 0.08, 0.12, 0.20, 0.35],
+        "dndr": [100.0, 600.0, 1800.0, 1500.0, 750.0, 250.0],
+        "size_unit": "um",
+        "size_definition": "volume_equivalent_sphere_radius",
+        "integration_mode": "discrete_bin"
+      },
+      "refractive_index": {
+        "mode": "database"
+      }
+    }
+  ],
+  "output": {
+    "path": "outputs/two_component_demo.nc",
+    "format": "netcdf4",
+    "compression": true,
+    "compression_level": 4,
+    "shuffle": true,
+    "atomic": true
+  }
+}

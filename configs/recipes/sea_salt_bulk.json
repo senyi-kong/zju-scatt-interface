@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "name": "sea_salt_humidity_ensemble",
+  "wavelength_unit": "um",
+  "wavelengths": [0.44, 0.55, 0.67, 0.87, 1.64, 3.7, 10.0],
+  "particles": [
+    {
+      "name": "sea_salt",
+      "particle_type": "coated_super_spheroid_seasalt",
+      "size_distribution": {
+        "size": [0.05, 0.1, 0.2, 0.5, 1, 2, 5],
+        "dndr": [20, 80, 200, 300, 150, 30, 2],
+        "size_unit": "um",
+        "size_definition": "volume_equivalent_sphere_radius"
+      },
+      "refractive_index": {
+        "mode": "database"
+      },
+      "shape_parameters": {
+        "relative_humidity": {
+          "values": [0.5, 0.8, 0.95],
+          "weights": [0.2, 0.5, 0.3]
+        },
+        "humidity_branch": "deliquescence"
+      }
+    }
+  ],
+  "calculation": {
+    "include_phase_matrix": true,
+    "scattering_angles_degrees": [0, 30, 60, 90, 120, 150, 180],
+    "truncation_policy": "truncate",
+    "check_convergence": true,
+    "strict_qa": true
+  },
+  "output": {
+    "path": "outputs/sea_salt_bulk.nc",
+    "format": "netcdf4",
+    "compression": true,
+    "atomic": true
+  }
+}

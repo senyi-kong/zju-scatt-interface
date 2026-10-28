@@ -1,0 +1,64 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  core:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.9", "3.11", "3.12", "3.13", "3.14"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install .
+      - run: python -m unittest discover -s tests -v
+      - run: zju-scatt --help
+      - run: zju-scatt doctor --offline --json
+
+  scientific-extras:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install .
+      - run: python -m pip check
+      - run: python -c "import numpy, h5py, netCDF4, matplotlib"
+      - run: zju-scatt doctor --offline --json
+      - run: python -m unittest discover -s tests -v
+
+  package-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install build twine
+      - run: python -m build
+      - run: python -m twine check dist/*
+      - name: Check developer tools are excluded from PyPI artifacts
+        run: >-
+          python -c "import pathlib, tarfile, zipfile;
+          names = [n for p in pathlib.Path('dist').glob('*.whl') for n in zipfile.ZipFile(p).namelist()];
+          names += [n.split('/', 1)[-1] for p in pathlib.Path('dist').glob('*.tar.gz') for n in tarfile.open(p).getnames()];
+          assert not any(n == 'tools' or n.startswith('tools/') for n in names), names"
+      - run: python -m venv clean-install
+      - run: clean-install/bin/python -m pip install dist/*.whl
+      - run: clean-install/bin/zju-scatt --help
+      - run: clean-install/bin/zju-scatt-interface --version
+      - run: clean-install/bin/zju_scatt --version
+      - run: clean-install/bin/zju_scatt_interface --version
+      - run: clean-install/bin/zju-scatt doctor --offline --json
+      - run: clean-install/bin/python -c "import zju_scatt_interface; print(zju_scatt_interface.__version__)"

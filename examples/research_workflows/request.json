@@ -1,0 +1,24 @@
+{
+  "_description": "Retrieve sea-salt single-scattering data at 1.5 um. Interpolate if needed; retain native size and humidity coordinates. No PSD or bulk calculation is requested.",
+  "sources": [
+    "Single_opt/coated_super_spheroid_seasalt/"
+  ],
+  "particle_types": [
+    "coated_super_spheroid_seasalt"
+  ],
+  "extensions": [
+    "nc"
+  ],
+  "wavelength_unit": "um",
+  "target_wavelengths": [
+    1.5
+  ],
+  "target_wavelength_mode": "interp",
+  "apply_interpolation": true,
+  "download": true,
+  "output_dir": "downloads/json_seasalt",
+  "manifest_output": "downloads/json_seasalt/selection_manifest.jsonl",
+  "manifest_format": "jsonl",
+  "operation_log": "downloads/json_seasalt/retrieval_operation.log",
+  "yes": true
+}

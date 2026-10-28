@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "name": "black_carbon_shape_ensemble",
+  "wavelength_unit": "nm",
+  "wavelengths": [440, 550, 670, 870],
+  "particles": [
+    {
+      "name": "black_carbon",
+      "particle_type": "encapsulated_fractal_aggregates_black_carbon",
+      "size_distribution": {
+        "size": [30, 50, 80, 120, 200, 350, 600],
+        "dndr": [50, 180, 400, 500, 260, 80, 10],
+        "size_unit": "nm",
+        "size_definition": "volume_equivalent_sphere_radius"
+      },
+      "refractive_index": {
+        "mode": "fixed",
+        "black_carbon": {
+          "real": 1.85,
+          "imaginary": 0.55
+        },
+        "hygroscopic": {
+          "real": 1.4,
+          "imaginary": 0.05
+        }
+      },
+      "shape_ensemble": [
+        {
+          "df": 1.8,
+          "vf": 0.1,
+          "weight": 0.25
+        },
+        {
+          "df": 2.1,
+          "vf": 0.2,
+          "weight": 0.5
+        },
+        {
+          "df": 2.4,
+          "vf": 0.4,
+          "weight": 0.25
+        }
+      ]
+    }
+  ],
+  "calculation": {
+    "include_phase_matrix": true,
+    "scattering_angles_degrees": [0, 30, 60, 90, 120, 150, 180],
+    "truncation_policy": "truncate",
+    "check_convergence": true,
+    "strict_qa": true
+  },
+  "output": {
+    "path": "outputs/black_carbon_bulk.nc",
+    "format": "netcdf4",
+    "compression": true,
+    "atomic": true
+  }
+}

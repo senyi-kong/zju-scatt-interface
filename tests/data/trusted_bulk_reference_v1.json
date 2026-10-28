@@ -1,0 +1,19 @@
+{
+  "reference_name": "analytic_three_bin_bulk_optics",
+  "method": "independent hand calculation from sum(C_i * N_i)",
+  "size_um": [0.2, 0.5, 1.0],
+  "dndr_cm3": [10.0, 20.0, 30.0],
+  "extinction_cross_section_m2": [1e-12, 2e-12, 4e-12],
+  "scattering_cross_section_m2": [8e-13, 1e-12, 1e-12],
+  "asymmetry_factor": [0.0, 0.5, 0.9],
+  "expected": {
+    "number_concentration_cm3": 60.0,
+    "beta_ext_m-1": 0.00017,
+    "beta_sca_m-1": 0.000058,
+    "beta_abs_m-1": 0.000112,
+    "single_scattering_albedo": 0.3411764705882353,
+    "asymmetry_factor": 0.6379310344827587
+  },
+  "relative_tolerance": 1e-12,
+  "absolute_tolerance": 1e-15
+}

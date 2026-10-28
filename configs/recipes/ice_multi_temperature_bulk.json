@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "name": "ice_160_220_270_k",
+  "wavelength_unit": "cm-1",
+  "wavelengths": [14925.373, 1000, 833.333, 769.231],
+  "particles": [
+    {
+      "name": "ice_160k",
+      "particle_type": "super_spheroid_ice",
+      "size_distribution": {
+        "size": [5, 10, 20, 40, 80, 150],
+        "dndr": [5, 30, 100, 80, 20, 2],
+        "size_definition": "volume_equivalent_sphere_radius"
+      },
+      "refractive_index": {
+        "mode": "database_temperature",
+        "temperature_k": 160
+      },
+      "shape_parameters": {
+        "roundness": 2.0,
+        "aspect_ratio": 1.0
+      }
+    },
+    {
+      "name": "ice_220k",
+      "particle_type": "super_spheroid_ice",
+      "size_distribution": {
+        "size": [5, 10, 20, 40, 80, 150],
+        "dndr": [5, 30, 100, 80, 20, 2],
+        "size_definition": "volume_equivalent_sphere_radius"
+      },
+      "refractive_index": {
+        "mode": "database_temperature",
+        "temperature_k": 220
+      },
+      "shape_parameters": {
+        "roundness": 2.0,
+        "aspect_ratio": 1.0
+      }
+    },
+    {
+      "name": "ice_270k",
+      "particle_type": "super_spheroid_ice",
+      "size_distribution": {
+        "size": [5, 10, 20, 40, 80, 150],
+        "dndr": [5, 30, 100, 80, 20, 2],
+        "size_definition": "volume_equivalent_sphere_radius"
+      },
+      "refractive_index": {
+        "mode": "database_temperature",
+        "temperature_k": 270
+      },
+      "shape_parameters": {
+        "roundness": 2.0,
+        "aspect_ratio": 1.0
+      }
+    }
+  ],
+  "calculation": {
+    "include_phase_matrix": true,
+    "scattering_angles_degrees": [0, 30, 60, 90, 120, 150, 180],
+    "truncation_policy": "truncate",
+    "check_convergence": true,
+    "strict_convergence": false,
+    "strict_qa": true
+  },
+  "output": {
+    "path": "outputs/ice_multi_temperature.h5",
+    "format": "hdf5",
+    "compression": true,
+    "atomic": true
+  }
+}
